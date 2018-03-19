@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+a, .red-color{
+  color:red;
+}
+
+.red-background, .btn-primary:hover,.btn-primary:focus {
+  background-color:red;
+}
+
+.arsenal-font{
+  font-family: "Franklin Gothic Book";
+}

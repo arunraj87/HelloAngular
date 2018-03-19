@@ -1,0 +1,6 @@
+<div class="center">
+  <input placeholder="Username" class="form-control" [(ngModel)] = "userName" name = "userName" type="text"><br>
+  <input placeholder="Password" class="form-control" [(ngModel)] = "password" name="password" type="password"><br>
+  <button class="btn red-background btn-primary center-block" (click)="validate(userName,password)">Log In</button><br>
+  <span style="color:red">{{errorMessage}}</span>
+</div>
