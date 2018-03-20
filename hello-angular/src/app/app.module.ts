@@ -1,13 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { TestComponentComponent } from './test-component/test-component.component';
-import { CredentialsService} from "./services/credentials.service";
+import { CredentialsService} from './services/credentials.service';
 import { LoginComponent } from './login/login.component';
-import { RouterModule} from "@angular/router";
-import { HttpClientModule} from "@angular/common/http";
-import { appRoutes} from "./routes";
+import { RouterModule} from '@angular/router';
+import { HttpClientModule} from '@angular/common/http';
+import { appRoutes} from './routes';
 
 @NgModule({
   declarations: [
@@ -22,6 +22,6 @@ import { appRoutes} from "./routes";
     HttpClientModule
   ],
   providers: [CredentialsService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, LoginComponent]
 })
 export class AppModule { }

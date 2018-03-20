@@ -10,15 +10,17 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
   errorMessage: String;
   credentials = [];
-  constructor(private credentialService: CredentialsService, private rounter: Router){
+  userName: String;
+  password: String;
+  constructor(private credentialService: CredentialsService, private rounter: Router) {
   }
-  validate(userName, password){
+  validate(userName, password) {
     this.credentialService.getCredentials(userName, password).subscribe(data => {
       this.credentials = data;
       if (this.credentials.length === 0) {
-        const credent: Credential = { userName, password} as Credential;
-        this.credentialService.saveData(credent).subscribe();
-        this.errorMessage= "Invalid username or password. Please try again."
+        // const credent: Credential = { userName, password} as Credential;
+        // this.credentialService.saveData(credent).subscribe();
+        this.errorMessage = 'Invalid username or password. Please try again.';
       } else {
         this.rounter.navigate(['success']);
       }
