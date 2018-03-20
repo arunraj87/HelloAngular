@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {CredentialsService} from "../services/credentials.service";
-import {Router} from "@angular/router";
+import {CredentialsService} from '../services/credentials.service';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-login-component',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
