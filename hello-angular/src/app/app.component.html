@@ -3,6 +3,8 @@
     Welcome to {{title}}!
   </h3>
   <a class='pull-right' *ngIf="router.url === '/'" [routerLink]="['login']">Login</a>
+  <a class='pull-right' *ngIf="router.url !== '/' && router.url !== '/login'" [routerLink]="['/']">Logout</a>
   <img width="100" alt="Angular Logo" src="https://png.icons8.com/color/1600/arsenal-fc.png">
 </div>
 <router-outlet></router-outlet>
+

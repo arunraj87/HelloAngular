@@ -1,13 +1,17 @@
-<div style="text-align: center">
-  <div class="col-sm-2 col-md-2 col-lg-2">
-    <form autocomplete="off" #loginForm="ngForm" (ngSubmit)="validate(loginForm.value.userName,loginForm.value.password)">
-      <div class="formgroup">
-          <input placeholder="Username" id="username" class="form-control"
-                 (ngModel) = "userName" name = "userName" type="text">
+<h1>Login</h1>
+<hr>
+<div class="centered">
+  <div class="col-md-3" style="position: relative;left:37%;">
+    <form #loginForm="ngForm" (ngSubmit)="validate(loginForm.value)" autocomplete="off">
+      <div class="form-group" >
+        <input placeholder="Username" id="username" class="form-control"
+               (ngModel) = "userName" name = "userName" type="text"/>
       </div>
-      <div class="formgroup">
-      <input placeholder="Password" id="password" class="form-control"
-             (ngModel) = "password" name="password" type="password">
+      <div class="form-group" >
+        <div class="controls">
+          <input placeholder="Password" id="password" class="form-control"
+                 (ngModel) = "password" name="password" type="password"/>
+        </div>
       </div>
       <button type="submit" class="btn red-background btn-primary center-block">Log In</button><br>
     </form>

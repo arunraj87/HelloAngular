@@ -7,6 +7,8 @@ import { CredentialsService} from './services/credentials.service';
 import { LoginComponent } from './login/login.component';
 import { RouterModule} from '@angular/router';
 import { HttpClientModule} from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
 import { appRoutes} from './routes';
 
 @NgModule({
@@ -19,7 +21,14 @@ import { appRoutes} from './routes';
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
-    HttpClientModule
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, {
+        dataEncapsulation: false,
+        passThruUnknownUrl: true,
+        put204: false // return entity after PUT/update
+      }
+    )
   ],
   providers: [CredentialsService],
   bootstrap: [AppComponent, LoginComponent]

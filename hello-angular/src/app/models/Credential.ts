@@ -1,5 +1,4 @@
-interface Credential{
-
-  userName :String;
-  password :String;
+interface Credential {
+  userName: string;
+  password: string;
 }
