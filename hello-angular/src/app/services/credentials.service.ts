@@ -1,14 +1,16 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
+import {Credentials} from 'crypto';
 
 @Injectable()
 export class CredentialsService {
-  private isUserLoggedIn = false;
   private _url: string = 'api/';
   private httpOptions = {};
-  private response = new Observable<Credential[]>;
+  public isUserLoggedIn: Boolean = false;
+  private response: Observable<Credential[]>;
   private userDetail = [];
+  private newUser: Users;
   constructor(private httpClient: HttpClient) {
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -17,13 +19,32 @@ export class CredentialsService {
       })
     };
   }
-saveData(credential: Credential) {
-  return this.httpClient.post(this._url, credential, this.httpOptions);
-}
+  saveUser(userData: Users, credential: Credential): Boolean {
+    this.httpClient.post<Credential>(this._url + 'credentials', credential, this.httpOptions).subscribe(data => console.log(data));
+    this.httpClient.post<Users>(this._url + 'usersDetails', userData, this.httpOptions).subscribe(data => console.log(data));
+    return true;
+  }
+
+  updateUser(userData: Users, credential: Credential) {
+    // this.httpClient.put<Credential>(this._url + 'credentials', credential, this.httpOptions).subscribe(data => console.log(data));
+     this.httpClient.put<Users[]>(this._url + 'usersDetails', userData, this.httpOptions).subscribe(data => this.userDetail = data);
+     return this.userDetail;
+  }
+
+  fetchLinks() {
+    return this.httpClient.get<Links[]>(this._url + 'sampleURLS');
+  }
+
+  getUserById(id): Observable<Users> {
+    const options = {params: new HttpParams().append('id', id)};
+    return this.httpClient.get<Users>(this._url + 'usersDetails', options);
+  }
+
   getUser(username: string, password: string): Observable<Credential[]> {
     const options = {params: new HttpParams().append('userName', username).append('password', password)};
     this.response = this.httpClient.get<Credential[]>(this._url + 'credentials', options);
     if (this.response) {
+      this.isUserLoggedIn = true;
       this.fetchUserDetails(username, password);
     }
     return this.response;
@@ -34,6 +55,10 @@ saveData(credential: Credential) {
   }
   getUserDetails() {
     return this.userDetail;
+  }
+
+  logout() {
+    this.isUserLoggedIn = false ;
   }
 }
 

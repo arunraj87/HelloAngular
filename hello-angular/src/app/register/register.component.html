@@ -1,0 +1,27 @@
+<h1>Sign Up</h1>
+<hr>
+<div class="col-md-3">
+    <form #registerForm="ngForm" (ngSubmit)="register(registerForm.value)" autocomplete="off">
+      <div class="form-group" >
+        <input placeholder="First name..." id="firstName" class="form-control"
+               name = "firstName" value="{{user?.firstName}}" type="text"/>
+      </div>
+      <div class="form-group" >
+        <input placeholder="Last name..." id="lastName" class="form-control"
+                name="lastName" value="{{user?.lastName}}" type="text"/>
+      </div>
+      <div class="form-group" >
+        <input placeholder="Username" id="username" class="form-control"
+                name = "userName" value="{{user?.userName}}" type="text"/>
+      </div>
+      <div class="form-group" >
+          <input placeholder="Password" id="password" class="form-control"
+                  name="password" type="password"/>
+      </div>
+      <div class="center-block" style="text-align: center;">
+        <button type="submit" class="btn red-background btn-primary">Save</button>
+        <button type="button" (click) =(cancel()) class="btn btn-primary">Cancel</button><br>
+      </div>
+    </form>
+</div>
+

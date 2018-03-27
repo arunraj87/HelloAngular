@@ -1,5 +1,7 @@
 interface Users {
+  id: number;
   firstName: String;
   lastName: String;
-  credential: Credential;
+  userName: string;
+  password: string;
 }

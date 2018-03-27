@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
+import {CredentialsService} from '../app/services/credentials.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,12 @@ import {Router} from '@angular/router';
 })
 export class AppComponent {
   title = 'Arsenal FC';
-  constructor(public router: Router){
+  constructor(public router: Router, public service: CredentialsService){
+   }
+
+   logout() {
+    this.service.logout();
+    this.router.navigate(['/']);
    }
 }
 

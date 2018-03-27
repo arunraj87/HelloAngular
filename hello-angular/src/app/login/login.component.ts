@@ -25,7 +25,9 @@ export class LoginComponent implements OnInit {
         this.rounter.navigate(['success']);
       }
     });
-
+  }
+  register() {
+    this.rounter.navigate(['register']);
   }
 
   ngOnInit() {
