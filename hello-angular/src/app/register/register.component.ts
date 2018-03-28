@@ -15,10 +15,13 @@ export class RegisterComponent implements OnInit {
    private lastName: FormControl;
    private userName: FormControl;
    private password: FormControl;
-  registerForm: FormGroup;
-  constructor(private credentialService: CredentialsService,
+   isUserLoggedIn: Boolean;
+   registerForm: FormGroup;
+  constructor(public credentialService: CredentialsService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+      this.isUserLoggedIn = credentialService.isUserLoggedIn;
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id') ? Number(this.route.snapshot.paramMap.get('id')) : null;
@@ -27,7 +30,7 @@ export class RegisterComponent implements OnInit {
       this.firstName = new FormControl(this.user ? this.user.firstName : '');
       this.lastName = new FormControl(this.user ? this.user.lastName : '');
       this.userName = new FormControl(this.user ? this.user.userName : '');
-      this.password = new FormControl();
+      this.password = new FormControl(this.user ? this.user.password : '');
       this.registerForm = new FormGroup({
         firstName: this.firstName,
         lastName: this.lastName,
@@ -41,7 +44,7 @@ export class RegisterComponent implements OnInit {
      if (this.credentialService.isUserLoggedIn) {
        this.router.navigate(['/success']);
      } else {
-       this.router.navigate(['/']);
+       this.router.navigate(['/login']);
      }
   }
 
@@ -51,6 +54,7 @@ export class RegisterComponent implements OnInit {
     userName = newUser.userName;
     password = newUser.password;
     const newCredent: Credential = { userName, password } as Credential;
+    newCredent.id = this.id;
     if (this.id) {
       Object.assign(this.user, newUser);
       this.user = this.credentialService.updateUser(this.user, newCredent)[0];
