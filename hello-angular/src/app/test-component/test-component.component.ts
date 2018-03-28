@@ -12,7 +12,7 @@ export class TestComponentComponent implements OnInit {
   firstName: string;
   lastName: string;
   id: number;
-  userDetails = [];
+  userDetails: Users;
   links = [];
 
   constructor(private credentialService: CredentialsService, private router: Router) {
@@ -22,10 +22,10 @@ export class TestComponentComponent implements OnInit {
   ngOnInit() {
     this.userDetails = this.credentialService.getUserDetails();
     this.credentialService.fetchLinks().subscribe(data => this.links = data);
-    if (this.userDetails.length > 0) {
-      this.firstName = this.userDetails[0].firstName;
-      this.lastName = this.userDetails[0].lastName;
-      this.id = this.userDetails[0].id;
+    if (this.userDetails) {
+      this.firstName = this.userDetails.firstName;
+      this.lastName = this.userDetails.lastName;
+      this.id = this.userDetails.id;
     }
   }
 }
