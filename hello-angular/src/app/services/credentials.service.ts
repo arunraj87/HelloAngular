@@ -11,7 +11,7 @@ export class CredentialsService {
   private response: Observable<Credential[]>;
   private userDetail ;
   private newUser: Users;
-  constructor(private httpClient: HttpClient, private router: Router,) {
+  constructor(private httpClient: HttpClient, private router: Router) {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -45,27 +45,24 @@ export class CredentialsService {
     return this.httpClient.get<Users>(this._url + 'usersDetails', options);
   }
 
+  setUserLoggedInStatus(flag: Boolean) {
+    this.isUserLoggedIn = flag ;
+  }
+
   getUser(username: string, password: string): Observable<Credential[]> {
     const options = {params: new HttpParams().append('userName', username).append('password', password)};
-    this.response = this.httpClient.get<Credential[]>(this._url + 'credentials', options);
-    if (this.response) {
-      this.isUserLoggedIn = true;
-      this.fetchUserDetails(username, password);
-    }
-    return this.response;
-  }
+    return this.httpClient.get<Credential[]>(this._url + 'credentials', options);
+   }
+
   fetchUserDetails(username: string, password: string) {
       const options = {params: new HttpParams().append('userName', username).append('password', password)};
       this.httpClient.get<Users[]>(this._url + 'usersDetails' , options ).subscribe(data => {
         this.userDetail = data[0];
+        this.router.navigate(['success']);
       });
   }
   getUserDetails() {
     return this.userDetail;
-  }
-
-  logout() {
-    this.isUserLoggedIn = false ;
   }
 }
 
