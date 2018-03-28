@@ -3,7 +3,6 @@ import {CredentialsService} from '../services/credentials.service';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'ng-component',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
