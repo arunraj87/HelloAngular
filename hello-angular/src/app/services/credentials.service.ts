@@ -23,13 +23,12 @@ export class CredentialsService {
     this.httpClient.post<Credential>(this._url + 'credentials', credential, this.httpOptions);
     this.httpClient.post<Users>(this._url + 'usersDetails', userData, this.httpOptions).subscribe(
       data => {
-        this.fetchUsers();
         this.router.navigate(['/login']);
       });
   }
 
   updateUser(userData: Users, credential: Credential) {
-     this.httpClient.put<Credential>(this._url + 'credentials', credential, this.httpOptions).subscribe(data => console.log(data));
+     this.httpClient.put<Credential>(this._url + 'credentials', credential, this.httpOptions)
      this.httpClient.put<Users[]>(this._url + 'usersDetails', userData, this.httpOptions).subscribe(data => {
        this.userDetail = data;
        this.router.navigate(['/success']);
@@ -39,11 +38,6 @@ export class CredentialsService {
 
   fetchLinks() {
     return this.httpClient.get<Links[]>(this._url + 'sampleURLS');
-  }
-
-  fetchUsers() {
-    this.httpClient.get<Users[]>(this._url + 'usersDetails');
-    this.httpClient.get<Credential[]>(this._url + 'credentials').subscribe(data => console.log(data));
   }
 
   getUserById(id): Observable<Users> {
@@ -63,7 +57,6 @@ export class CredentialsService {
   fetchUserDetails(username: string, password: string) {
       const options = {params: new HttpParams().append('userName', username).append('password', password)};
       this.httpClient.get<Users[]>(this._url + 'usersDetails' , options ).subscribe(data => {
-        this.fetchUsers();
         this.userDetail = data[0];
       });
   }
